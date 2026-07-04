@@ -10,14 +10,20 @@ const app = express();
 
 const normalizeOrigin = (origin) => origin.replace(/\/$/, '');
 
-const allowedOrigins = (
-  process.env.CLIENT_URL ||
-  'http://localhost:3000,https://internixconsultancy.com,https://www.internixconsultancy.com'
-)
+const defaultAllowedOrigins = [
+  'http://localhost:3000',
+  'https://internixconsultancy.com',
+  'https://www.internixconsultancy.com'
+];
+
+const envAllowedOrigins = (process.env.CLIENT_URL || '')
   .split(',')
   .map((origin) => origin.trim())
-  .map(normalizeOrigin)
   .filter(Boolean);
+
+const allowedOrigins = [
+  ...new Set([...defaultAllowedOrigins, ...envAllowedOrigins].map(normalizeOrigin))
+];
 
 app.use(
   cors({
