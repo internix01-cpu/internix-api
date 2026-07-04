@@ -13,3 +13,4 @@ router.post('/login', loginCandidate);
 router.get('/me', protect, getCandidateProfile);
 
 module.exports = router;
+ 
