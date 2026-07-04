@@ -8,15 +8,21 @@ const { notFound, errorHandler } = require('./middleware/errorMiddleware');
 
 const app = express();
 
-const allowedOrigins = (process.env.CLIENT_URL || 'http://localhost:3000')
+const normalizeOrigin = (origin) => origin.replace(/\/$/, '');
+
+const allowedOrigins = (
+  process.env.CLIENT_URL ||
+  'http://localhost:3000,https://internixconsultancy.com,https://www.internixconsultancy.com'
+)
   .split(',')
   .map((origin) => origin.trim())
+  .map(normalizeOrigin)
   .filter(Boolean);
 
 app.use(
   cors({
     origin: (origin, callback) => {
-      if (!origin || allowedOrigins.includes(origin)) {
+      if (!origin || allowedOrigins.includes(normalizeOrigin(origin))) {
         return callback(null, true);
       }
 
