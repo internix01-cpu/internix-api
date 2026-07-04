@@ -1,0 +1,34 @@
+{
+  "name": "internix-api",
+  "version": "1.0.0",
+  "description": "Internix candidate registration and dashboard backend",
+  "main": "src/server.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js",
+    "build": "node --check src/server.js && node --check src/app.js && node --check src/config/db.js && node --check src/models/Candidate.js && node --check src/controllers/candidateController.js && node --check src/controllers/paymentController.js && node --check src/controllers/offerLetterController.js && node --check src/middleware/authMiddleware.js && node --check src/middleware/errorMiddleware.js && node --check src/routes/candidateRoutes.js && node --check src/routes/paymentRoutes.js && node --check src/routes/offerLetterRoutes.js && node --check src/utils/generateToken.js"
+  },
+  "keywords": [
+    "internix",
+    "express",
+    "mongodb",
+    "mongoose"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.9.5"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.9"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
